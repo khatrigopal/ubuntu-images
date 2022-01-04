@@ -8,6 +8,9 @@ trigger:
 resources:
 - repo: self
 
+pool:
+  vmImage: 'ubuntu-latest'
+
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'd3c1ee98-c73c-4df5-a377-cdc9b42c59e9'
@@ -17,7 +20,7 @@ variables:
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  # vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: Build
@@ -25,8 +28,6 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      vmImage: $(vmImageName)
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
