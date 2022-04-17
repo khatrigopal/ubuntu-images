@@ -22,8 +22,8 @@ pipeline {
         stage('Test'){
             steps {
                 sh 'wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb'
-                sh sudo dpkg -i trivy_0.18.3_Linux-64bit.deb
-                trivy image jenkins-ubuntu-nginx:latest || exit 0
+                sh 'sudo dpkg -i trivy_0.18.3_Linux-64bit.deb'
+                sh 'trivy image jenkins-ubuntu-nginx:latest || exit 0'
             }
         }
         stage('Deploy') {
