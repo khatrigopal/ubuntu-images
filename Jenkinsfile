@@ -15,7 +15,7 @@ pipeline {
         stage('Build') { 
             steps { 
                 script{
-                 app = docker.build("jenkins-ubuntu-nginx")
+                    app = docker.build("jenkins-ubuntu-nginx:${env.BUILD_ID}")
                 }
             }
         }
@@ -28,8 +28,8 @@ pipeline {
             steps {
                 script{
                         docker.withRegistry('https://017187748261.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:sudhamsd') {
-                    app.push("${env.BUILD_NUMBER}")
-                    app.push("latest")
+                    #app.push("${env.BUILD_NUMBER}")
+                    app.push()
                     }
                 }
             }
